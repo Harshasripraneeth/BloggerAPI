@@ -50,41 +50,32 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="20dp" />
 
-            <TextView
-                android:id="@+id/tvAuthorName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:padding="4dp"
-                android:text="@{DisplayName}"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.002"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvURL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="36dp"
+                android:autoLink="web"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:linksClickable="true"
                 android:padding="3dp"
                 android:text="@{URL}"
+                android:textColorLink="@color/hyperLinks"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.023"
+                app:layout_constraintHorizontal_bias="0.091"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/tvAuthorName"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="171dp" />
+                app:layout_constraintGuide_begin="99dp" />
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -94,6 +85,8 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="@{title}"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:fontFamily="serif"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@{published}"
+                android:fontFamily="serif"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.024"
@@ -121,6 +115,7 @@
                 android:layout_marginEnd="304dp"
                 android:text="@{item.updated}"
                 android:textSize="18sp"
+                android:fontFamily="serif"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/tvPublish" />
@@ -134,6 +129,7 @@
                 android:padding="3dp"
                 android:text="@{content}"
                 android:textSize="18sp"
+                android:fontFamily="serif"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
