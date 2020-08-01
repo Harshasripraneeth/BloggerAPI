@@ -4,5 +4,5 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="hyperLinks">#00CCFF</color>
-    <color name="buttonText">#A52A2A</color>
+    <color name="buttonTextColor">#A52A2A</color>
 </resources>

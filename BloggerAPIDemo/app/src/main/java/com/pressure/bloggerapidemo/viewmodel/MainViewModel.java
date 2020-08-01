@@ -11,12 +11,13 @@ import com.pressure.bloggerapidemo.repository.AppRepository;
 
 public class MainViewModel extends AndroidViewModel {
     private AppRepository repository;
+
     public MainViewModel(@NonNull Application application) {
         super(application);
         repository = new AppRepository(application);
     }
-    public LiveData<Blog> getBlogDetails()
-    {
-        return  repository.getBlogDetails();
+
+    public LiveData<Blog> getBlogDetails() {
+        return repository.getBlogDetails();
     }
 }

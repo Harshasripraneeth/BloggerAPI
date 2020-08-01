@@ -11,12 +11,13 @@ import com.pressure.bloggerapidemo.repository.AppRepository;
 
 public class PostsActivityViewModel extends AndroidViewModel {
     private AppRepository repository;
+
     public PostsActivityViewModel(@NonNull Application application) {
         super(application);
         repository = new AppRepository(application);
     }
-    public LiveData<BloogerList> getPostsList()
-    {
-       return repository.getPostsList();
+
+    public LiveData<BloogerList> getPostsList() {
+        return repository.getPostsList();
     }
 }
