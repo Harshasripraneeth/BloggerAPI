@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BloggerAPIDemo</string>
+    <string name="api_key">YOUR_API_KEY</string>
+    <string name="label"> YOUR_LABEL </string>
+    <string name="blogId"> YOUR_BLOG_ID</string>
 </resources>
