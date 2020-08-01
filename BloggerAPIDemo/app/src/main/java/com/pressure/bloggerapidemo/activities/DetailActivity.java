@@ -20,6 +20,11 @@ public class DetailActivity extends AppCompatActivity {
 
         detailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         dateConversionUtil = new DateConversionUtil();
+
+        /**
+         *  Post details which are sent from the PostsActivity is retrieved and displayed
+         *  using DataBinding.
+         */
         Intent intent = getIntent();
         if (intent.hasExtra("data")) {
             Bundle bundle = intent.getBundleExtra("data");

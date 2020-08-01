@@ -17,6 +17,9 @@ public class PostsActivityViewModel extends AndroidViewModel {
         repository = new AppRepository(application);
     }
 
+    /**
+     * returns the LiveData which contains lists of posts in the mentioned blogId.
+     */
     public LiveData<BloogerList> getPostsList() {
         return repository.getPostsList();
     }

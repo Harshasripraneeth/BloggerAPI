@@ -25,7 +25,8 @@ public class AppRepository {
     }
 
     /**
-     * This function helps to get Blog details and returns the livedata.
+     * This function helps to get Blog details and returns the LiveData.
+     * this function is called by the MainViewModel
      */
     public LiveData<Blog> getBlogDetails() {
         Context context = application.getApplicationContext();
@@ -52,8 +53,9 @@ public class AppRepository {
     }
 
     /**
-     * this function returns the livedata which consists of the Items or posts in the blog
+     * this function returns the LiveData which consists of the Items or posts in the blog
      * respective to the mentioned Blog Id.
+     * this function is called by the PostsViewModel class
      */
     public LiveData<BloogerList> getPostsList() {
         Context context = application.getApplicationContext();

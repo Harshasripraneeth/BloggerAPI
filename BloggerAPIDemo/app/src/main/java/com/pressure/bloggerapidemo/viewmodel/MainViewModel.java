@@ -17,6 +17,9 @@ public class MainViewModel extends AndroidViewModel {
         repository = new AppRepository(application);
     }
 
+    /**
+     * get the LiveData which contains blog details from the repository class
+     */
     public LiveData<Blog> getBlogDetails() {
         return repository.getBlogDetails();
     }
