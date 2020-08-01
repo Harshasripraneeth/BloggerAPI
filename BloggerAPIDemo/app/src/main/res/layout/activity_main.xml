@@ -98,39 +98,6 @@
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/tvBlogUpdated" />
 
-        <TextView
-            android:id="@+id/tvBlogLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            android:padding="5dp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="@{details.selfLink}"
-            android:autoLink="web"
-            android:linksClickable="true"
-            android:textColorLink="@color/hyperLinks"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.033"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvVisit" />
-
-        <TextView
-            android:id="@+id/tvBlogPostLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:autoLink="web"
-            android:linksClickable="true"
-            android:text="@{details.posts.selfLink}"
-            android:textColorLink="@color/hyperLinks"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/tvBlogLink" />
-
         <Button
             android:id="@+id/btnViewPosts"
             android:layout_width="wrap_content"
@@ -143,7 +110,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.36"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/tvBlogPostLink" />
+            app:layout_constraintTop_toBottomOf="@+id/tvVisit" />
+        <ProgressBar
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="visible"
+            style="?android:attr/progressBarStyleLarge"
+            android:id="@+id/progressBar1"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

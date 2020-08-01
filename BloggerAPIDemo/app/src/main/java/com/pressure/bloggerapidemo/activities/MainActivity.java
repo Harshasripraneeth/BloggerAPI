@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Blog blog) {
                 if (blog != null) {
+                    mainBinding.progressBar1.setVisibility(View.GONE);
                     mainBinding.setDetails(blog);
                     mainBinding.tvBlogPublish.setText("Published Date: " + dateConversionUtil.dateConversion(blog.getPublished()));
                     mainBinding.tvBlogUpdated.setText("Last Update: " + dateConversionUtil.dateConversion(blog.getUpdated()));

@@ -11,7 +11,7 @@ import com.pressure.bloggerapidemo.repository.AppRepository;
 
 public class PostsActivityViewModel extends AndroidViewModel {
     private AppRepository repository;
-
+    private LiveData<BloogerList> liveData;
     public PostsActivityViewModel(@NonNull Application application) {
         super(application);
         repository = new AppRepository(application);
@@ -21,6 +21,8 @@ public class PostsActivityViewModel extends AndroidViewModel {
      * returns the LiveData which contains lists of posts in the mentioned blogId.
      */
     public LiveData<BloogerList> getPostsList() {
-        return repository.getPostsList();
+        if(liveData == null)
+            liveData = repository.getPostsList();
+        return liveData;
     }
 }

@@ -69,9 +69,7 @@ public class AppRepository {
             public void onResponse(Call<BloogerList> call, Response<BloogerList> response) {
                 if (response.isSuccessful()) {
                     mutableLiveData.setValue(response.body());
-
                 }
-                mutableLiveData.setValue(null);
             }
 
             @Override

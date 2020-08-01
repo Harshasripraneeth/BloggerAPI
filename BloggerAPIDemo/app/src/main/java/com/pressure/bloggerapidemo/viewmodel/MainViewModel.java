@@ -11,6 +11,7 @@ import com.pressure.bloggerapidemo.repository.AppRepository;
 
 public class MainViewModel extends AndroidViewModel {
     private AppRepository repository;
+    private LiveData<Blog> liveData;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -21,6 +22,10 @@ public class MainViewModel extends AndroidViewModel {
      * get the LiveData which contains blog details from the repository class
      */
     public LiveData<Blog> getBlogDetails() {
-        return repository.getBlogDetails();
+        if(liveData != null)
+            return liveData;
+
+        liveData = repository.getBlogDetails();
+        return liveData;
     }
 }

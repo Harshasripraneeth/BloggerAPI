@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.pressure.bloggerapidemo.R;
@@ -51,8 +52,8 @@ public class PostsActivity extends AppCompatActivity implements CustomAdapter.It
             public void onChanged(BloogerList bloogerList) {
                 if (bloogerList != null) {
                     postsList = bloogerList.getItems();
-                    adapter.setList(postsList);
                 }
+                adapter.setList(postsList);
                 postsBinding.progressBar.setVisibility(View.GONE);
             }
         });
