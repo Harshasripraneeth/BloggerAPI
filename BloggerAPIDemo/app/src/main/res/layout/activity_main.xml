@@ -8,6 +8,11 @@
          name="details"
          type="com.pressure.bloggerapidemo.model.Blog" />
  </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -127,13 +132,13 @@
             app:layout_constraintTop_toBottomOf="@+id/tvBlogLink" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnViewPosts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:background="@drawable/custom_button_layout"
             android:text="view blog posts"
-            android:textColor="@color/buttonText"
+            android:textColor="@color/buttonTextColor"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.36"
@@ -141,5 +146,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tvBlogPostLink" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
 
