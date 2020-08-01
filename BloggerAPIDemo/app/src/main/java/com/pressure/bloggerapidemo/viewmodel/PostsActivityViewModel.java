@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.pressure.bloggerapidemo.model.BloogerList;
+import com.pressure.bloggerapidemo.repository.AppRepository;
 
 public class PostsActivityViewModel extends AndroidViewModel {
     private AppRepository repository;

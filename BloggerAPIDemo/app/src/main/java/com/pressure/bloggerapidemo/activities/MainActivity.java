@@ -1,106 +1,71 @@
 package com.pressure.bloggerapidemo.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.pressure.bloggerapidemo.adapters.CustomAdapter;
 import com.pressure.bloggerapidemo.R;
-import com.pressure.bloggerapidemo.apiclient.APIClient;
-import com.pressure.bloggerapidemo.apiservice.APIService;
-import com.pressure.bloggerapidemo.model.BloogerList;
-import com.pressure.bloggerapidemo.model.Item;
+import com.pressure.bloggerapidemo.databinding.ActivityMainBinding;
+import com.pressure.bloggerapidemo.model.Blog;
+import com.pressure.bloggerapidemo.utilities.DateConversionUtil;
+import com.pressure.bloggerapidemo.viewmodel.MainViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private CustomAdapter adapter;
-    private ProgressBar progressBar;
-    private List<Item> postsList;
-    private LinearLayoutManager layoutManager;
-    private  boolean isScrolling = false;
-    int currentSize,totalSize,scrolledOutSize;
-    String pageToken="";
+
+    private ActivityMainBinding mainBinding;
+    private MainViewModel viewModel;
+    private DateConversionUtil dateConversionUtil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.rcView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
-        postsList = new ArrayList<>();
-        adapter = new CustomAdapter(MainActivity.this,postsList);
-        recyclerView.setAdapter(adapter);
+        getSupportActionBar().setTitle("BLOG DETAILS");
+        dateConversionUtil = new DateConversionUtil();
+        mainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        mainBinding.tvVisit.setMovementMethod(LinkMovementMethod.getInstance());
 
-        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /**
+         * when the View Blog Posts button is clicked it traverses to PostsActivity
+         */
+        mainBinding.button2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
-                    isScrolling = true;
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,PostsActivity.class);
+                startActivity(intent);
             }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                currentSize = layoutManager.getChildCount();
-                totalSize = layoutManager.getItemCount();
-                scrolledOutSize = layoutManager.findFirstVisibleItemPosition();
-                if(isScrolling && ((currentSize + scrolledOutSize) == totalSize))
-                {
-                    isScrolling = false;
-                    getData();
-                }
-            }
-        });*/
+        });
         getData();
     }
     public void getData()
     {
-        String url = APIService.url;
-        Log.d("MainActvity","loaded");
-        APIClient apiservice = APIService.getClient().create(APIClient.class);
-       /* if(pageToken == null)
-            return;
-        if(pageToken !="")
-            url = url+"&pageToken="+pageToken;
-*/
-        Call<BloogerList> posts = apiservice.getTotalList(url);
-        Log.d("MainActvity","response calling");
-        posts.enqueue(new Callback<BloogerList>() {
-            @Override
-            public void onResponse(Call<BloogerList> call, Response<BloogerList> response) {
-                if(response.body() != null) {
-                    postsList = response.body().getItems();
-                  adapter.setList(postsList);
 
+        viewModel = ViewModelProviders.of(MainActivity.this).get(MainViewModel.class);
+        viewModel.getBlogDetails().observe(this, new Observer<Blog>() {
+            @Override
+            public void onChanged(Blog blog) {
+                if( blog != null)
+                {
+                    mainBinding.setDetails(blog);
+                    try {
+                        mainBinding.tvBlogPublish.setText("Published Date: "+ dateConversionUtil.dateConversion(blog.getPublished()));
+                        mainBinding.tvBlogUpdated.setText("Last Update: "+dateConversionUtil.dateConversion(blog.getUpdated()));
+                        mainBinding.button2.setVisibility(View.VISIBLE);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                 }
-
-                progressBar.setVisibility(View.GONE);
-
-                Toast.makeText(MainActivity.this, "loaded", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<BloogerList> call, Throwable t) {
-
             }
         });
     }
