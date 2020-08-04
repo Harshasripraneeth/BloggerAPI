@@ -61,13 +61,13 @@ public class AppRepository {
         Context context = application.getApplicationContext();
         final MutableLiveData<BloogerList> mutableLiveData = new MutableLiveData<>();
         APIClient apiservice = APIService.getClient().create(APIClient.class);
-        Call<BloogerList> posts = apiservice.getTotalList(context.getString(R.string.blogId), context.getString(R.string.label)
-                , context.getString(R.string.api_key));
-        Log.d("MainActvity", "response calling");
+        String url = "https://www.googleapis.com/blogger/v3/blogs/"+context.getString(R.string.blogId)+"/posts/search?q=label:"+context.getString(R.string.label)+"&key="+context.getString(R.string.api_key);
+        Call<BloogerList> posts = apiservice.getTotalList(url);
         posts.enqueue(new Callback<BloogerList>() {
             @Override
             public void onResponse(Call<BloogerList> call, Response<BloogerList> response) {
                 if (response.isSuccessful()) {
+
                     mutableLiveData.setValue(response.body());
                 }
             }

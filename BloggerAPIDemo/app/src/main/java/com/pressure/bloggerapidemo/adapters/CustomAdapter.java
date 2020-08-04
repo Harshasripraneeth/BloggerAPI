@@ -1,6 +1,7 @@
 package com.pressure.bloggerapidemo.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +68,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.viewHolder
         Elements elements = document.select("img");
         holder.customadapterLayoutBinding.tvTitle.setText(item.getTitle());
         holder.customadapterLayoutBinding.tvDescription.setText(document.text());
-        Glide.with(context).load(elements.get(0).attr("src")).into(holder.customadapterLayoutBinding.titleImage);
+        Log.d("elements",String.valueOf(elements));
+        Log.d("elements",String.valueOf(elements.size()));
 
+      if(elements.size()!=0)
+          Glide.with(context).load(elements.get(0).attr("src")).into(holder.customadapterLayoutBinding.titleImage);
+      else
+       holder.customadapterLayoutBinding.titleImage.setVisibility(View.GONE);
     }
 
     @Override

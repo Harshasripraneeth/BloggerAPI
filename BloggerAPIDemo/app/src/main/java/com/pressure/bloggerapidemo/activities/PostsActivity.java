@@ -52,6 +52,7 @@ public class PostsActivity extends AppCompatActivity implements CustomAdapter.It
             public void onChanged(BloogerList bloogerList) {
                 if (bloogerList != null) {
                     postsList = bloogerList.getItems();
+                   // filterList();
                 }
                 adapter.setList(postsList);
                 postsBinding.progressBar.setVisibility(View.GONE);
@@ -72,6 +73,19 @@ public class PostsActivity extends AppCompatActivity implements CustomAdapter.It
         bundle.putString("title", item.getTitle());
         intent.putExtra("data", bundle);
         startActivity(intent);
+    }
+    void filterList()
+    {
+        for(int i=0;i<postsList.size();i++)
+        {
+            Item item = postsList.get(i);
+            Log.d("label",item.getLabels().toString());
+            if(item.getLabels().size() != 1)
+            {
+                postsList.remove(i);
+                i--;
+            }
+        }
     }
 }
 

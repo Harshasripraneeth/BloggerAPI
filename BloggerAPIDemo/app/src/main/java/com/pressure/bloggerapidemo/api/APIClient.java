@@ -7,10 +7,14 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface APIClient {
     @GET("{blogid}/posts/search")
-    Call<BloogerList> getTotalList(@Path("blogid") String blogid, @Query("label") String label, @Query("key") String api_key);
+    Call<BloogerList> getTotalList1(@Path("blogid") String blogid, @Query("label") String label, @Query("key") String api_key);
+
+    @GET
+    Call<BloogerList> getTotalList(@Url String url);
 
     @GET("{blogid}/posts/{postid}")
     Call<BloogerList> getPostById(@Path("blogid") String blogid, @Path("postid") String postid, @Query("label") String label, @Query("key") String api_key);
