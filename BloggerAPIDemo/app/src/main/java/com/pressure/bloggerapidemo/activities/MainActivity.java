@@ -1,69 +1,58 @@
 package com.pressure.bloggerapidemo.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
+import android.view.MenuItem;
 
+import com.google.android.material.navigation.NavigationView;
 import com.pressure.bloggerapidemo.R;
-import com.pressure.bloggerapidemo.adapters.CustomAdapter;
-import com.pressure.bloggerapidemo.databinding.ActivityMainBinding;
-import com.pressure.bloggerapidemo.model.Blog;
-import com.pressure.bloggerapidemo.model.Item;
-import com.pressure.bloggerapidemo.utilities.DateConversionUtil;
-import com.pressure.bloggerapidemo.viewmodel.MainViewModel;
+import com.pressure.bloggerapidemo.fragments.DashBoardFragment;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity {
-
-    private ActivityMainBinding mainBinding;
-    private MainViewModel viewModel;
-    private DateConversionUtil dateConversionUtil;
-
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("BLOG DETAILS");
-        dateConversionUtil = new DateConversionUtil();
-        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mainBinding.tvVisit.setMovementMethod(LinkMovementMethod.getInstance());
-
-        mainBinding.btnViewPosts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PostsActivity.class);
-                startActivity(intent);
-            }
-        });
-        getData();
+        setContentView(R.layout.activity_main);
+        toolbar = findViewById(R.id.toolbar);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        setSupportActionBar(toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
     }
 
-    public void getData() {
+    @Override
+    public void onBackPressed() {
 
-        viewModel = ViewModelProviders.of(MainActivity.this).get(MainViewModel.class);
-        viewModel.getBlogDetails().observe(this, new Observer<Blog>() {
-            @Override
-            public void onChanged(Blog blog) {
-                if (blog != null) {
-                    mainBinding.progressBar1.setVisibility(View.GONE);
-                    mainBinding.setDetails(blog);
-                    mainBinding.tvBlogPublish.setText("Published Date: " + dateConversionUtil.dateConversion(blog.getPublished()));
-                    mainBinding.tvBlogUpdated.setText("Last Update: " + dateConversionUtil.dateConversion(blog.getUpdated()));
-                    mainBinding.btnViewPosts.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+        {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else
+            super.onBackPressed();
+
     }
 
-
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.nav_gallery:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new DashBoardFragment()).commit();
+                drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        return true;
+    }
 }

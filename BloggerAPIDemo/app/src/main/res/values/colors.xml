@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="hyperLinks">#00CCFF</color>
     <color name="buttonTextColor">#A52A2A</color>
+    <color name="splashTextColor">#0000FF</color>
+    <color name="nav_header">#ADD8E6</color>
 </resources>
