@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    android:gravity="bottom"
+    android:padding="@dimen/dimen_8dp"
+    android:background="@color/nav_header"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:fitsSystemWindows="true"
+        android:src="@drawable/splash_logo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="English Traingle"
+        android:textColor="@color/splashTextColor"
+        android:textSize="24sp"
+        android:paddingTop="@dimen/dimen_8dp"
+        android:fontFamily="sans-serif"/>
+
+</LinearLayout>
